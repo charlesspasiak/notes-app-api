@@ -9,7 +9,7 @@ class UsersHandler {
   }
 
   async postUserHandler(request, h) {
-    this._validator.validate(request.payload);
+    this._validator.validateUserPayload(request.payload);
 
     const { username, password, fullname } = request.payload;
 
