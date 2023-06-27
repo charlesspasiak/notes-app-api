@@ -90,37 +90,17 @@ class NotesHandler {
     }
   }
 
-  async putNoteByIdHandler(request, h) {
-    try {
-      this._validator.validateNotePayload(request.payload);
-      const { title, body, tags } = request.payload;
-      const { id } = request.params;
+  async putNoteByIdHandler(request) {
+    this._validator.validateNotePayload(request.payload);
+    const { title, body, tags } = request.payload;
+    const { id } = request.params;
 
-      await this._service.editNoteById(id, { title, body, tags });
+    await this._service.editNoteById(id, { title, body, tags });
 
-      return {
-        status: 'success',
-        message: 'Catatan berhasil diperbarui',
-      };
-    } catch (error) {
-      if (error instanceof ClientError) {
-        const response = h.response({
-          status: 'fail',
-          message: error.message,
-        });
-        response.code(error.statusCode);
-        return response;
-      }
-
-      // Server ERROR!
-      const response = h.response({
-        status: 'error',
-        message: 'Maaf, terjadi kegagalan pada server kami.',
-      });
-      response.code(500);
-      console.error(error);
-      return response;
-    }
+    return {
+      status: 'success',
+      message: 'Catatan berhasil diperbarui',
+    };
   }
 
   async deleteNoteByIdHandler(request, h) {
