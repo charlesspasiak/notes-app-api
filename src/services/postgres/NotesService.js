@@ -95,7 +95,6 @@ class NotesService {
     if (note.owner !== owner) {
       throw new AuthorizationError('Anda tidak berhak mengakses resource ini');
     }
-    console.log(note);
   }
 
   async verifyNoteAccess(noteId, userId) {
