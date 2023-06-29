@@ -39,6 +39,8 @@ class CollaborationsService {
 
   async verifyCollaborator(noteId, userId) {
     const query = {
+      // ! Perhatikan penulisan nama kolom. note_id jgn ditulis noteId. user_id bukan userId
+      // ! Harus sesuai nama kolom di tabel.
       text: 'SELECT * FROM collaborations WHERE note_id = $1 AND user_id = $2',
       values: [noteId, userId],
     };
